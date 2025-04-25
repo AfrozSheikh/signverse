@@ -1,65 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sign Language to Speech</title>
-    <script defer src="/static/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet"> -->
-<!-- </head>
-<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col items-center justify-center px-4 py-8">
-
-    <h1 class="text-3xl font-bold mb-6 text-blue-600">Sign Language to Text and Speech</h1>
-
-    <div class="mb-6 border-4 border-blue-500 rounded-lg overflow-hidden shadow-lg">
-        <img id="video" class="w-full max-w-2xl" src="{{ url_for('video_feed') }}" alt="Video Stream">
-    </div>
-
-    <h2 class="text-xl font-semibold mb-2">Detected Text:</h2>
-    <div id="output-box" class="w-full max-w-2xl bg-white rounded-lg border border-gray-300 p-4 mb-6 shadow-md text-lg text-gray-700">
-        Detecting...
-    </div>
-
-    <button id="stop-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
-        Stop and Speak
-    </button>
-
-</body>
-</html> -->
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sign Language to Speech</title>
-    <script defer src="/static/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col items-center justify-center px-4 py-8">
-
-    <h1 class="text-3xl font-bold mb-6 text-blue-600">Sign Language to Text and Speech</h1>
-
-    <div class="mb-6 border-4 border-blue-500 rounded-lg overflow-hidden shadow-lg">
-        <img id="video" class="w-full max-w-2xl" src="{{ url_for('video_feed') }}" alt="Video Stream">
-    </div>
-
-    <h2 class="text-xl font-semibold mb-2">Detected Text:</h2>
-    <div id="output-box" class="w-full max-w-2xl bg-white rounded-lg border border-gray-300 p-4 mb-6 shadow-md text-lg text-gray-700">
-        Detecting...
-    </div>
-
-    <div class="flex gap-4">
-        <button id="stop-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
-            Stop and Speak
-        </button>
-        <button id="clear-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
-            Clear Text
-        </button>
-    </div>
-
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,9 +6,8 @@
     <title>Sign Language to Speech</title>
     <script defer src="/static/script.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <style>
-        /* Background Animation */
         body {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             background-size: 400% 400%;
@@ -83,7 +20,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Glassmorphism Effect */
         .glass {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
@@ -92,36 +28,54 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* Button Hover Effects */
         .btn {
             transition: transform 0.2s ease-in-out, box-shadow 0.2s;
         }
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2);
         }
 
-        /* Neon Effect */
         .neon {
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
         }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen px-6 text-white">
+<body class="flex flex-col items-center justify-start min-h-screen px-4 py-10 text-white">
 
     <!-- Title -->
-    <h1 class="text-4xl font-extrabold text-center mb-6 text-cyan-400 drop-shadow-lg">
+    <h1 class="text-4xl font-extrabold text-center mb-10 text-cyan-400 drop-shadow-lg">
         🖐 Sign Language to Speech
     </h1>
 
-    <!-- Video Feed Container -->
-    <div class="relative border-4 border-cyan-400 rounded-xl overflow-hidden shadow-xl glass w-full max-w-2xl">
-        <img id="video" class="w-full rounded-xl" src="{{ url_for('video_feed') }}" alt="Video Stream">
+    <!-- Image and Video Side by Side -->
+    <div class="flex flex-col md:flex-row gap-8 items-start justify-center w-full max-w-4xl mb-10">
+        
+        <!-- Sign Language Chart Image -->
+        <div class="w-full md:w-1/2">
+            <img src="{{ url_for('static', filename='asl_signs.jpeg') }}" alt="Sign Language Chart"
+                 class="w-full h-64 object-contain rounded-xl shadow-lg border-2 border-cyan-300 bg-white">
+        </div>
+        
+        <!-- <div class="w-full md:w-1/2">
+            <img src="{{ url_for('static', filename='asl_signs.jpeg') }}" alt="Sign Language Chart"
+                 class="w-full h-64 object-contain rounded-xl shadow-lg border-2 border-cyan-300 bg-white">
+        </div> -->
+        
+
+        <!-- Video Feed -->
+        <div class="w-full md:w-1/2">
+            <div class="relative h-64 border-4 border-cyan-400 rounded-xl overflow-hidden shadow-xl glass w-full">
+                <img id="video" class="w-full h-full object-cover rounded-xl" src="{{ url_for('video_feed') }}" alt="Video Stream">
+            </div>
+        </div>
+
     </div>
 
     <!-- Detected Text -->
-    <h2 class="text-xl font-semibold mt-6">Detected Text:</h2>
-    <div id="output-box" class="glass w-full max-w-2xl p-4 text-lg text-white shadow-md mt-2">
+    <h2 class="text-xl font-semibold mt-4">Detected Text:</h2>
+    <div id="output-box" class="glass w-full max-w-md p-4 text-lg text-white shadow-md mt-2">
         Detecting...
     </div>
 

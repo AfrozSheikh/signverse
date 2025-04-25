@@ -126,7 +126,7 @@ def gen_frames():
                     if predicted_character in allowed_labels and predicted_character != last_character:
                         output_text += " " if predicted_character == 'space' else predicted_character
                         last_character = predicted_character
-                        time.sleep(0.5)
+                        time.sleep(1)
 
         ret, buffer = cv2.imencode('.jpg', frame)
         frame = buffer.tobytes()
