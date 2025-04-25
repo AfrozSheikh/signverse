@@ -53,23 +53,21 @@
     <div class="flex flex-col md:flex-row gap-8 items-start justify-center w-full max-w-4xl mb-10">
         
         <!-- Sign Language Chart Image -->
-        <div class="w-full md:w-1/2">
-            <img src="{{ url_for('static', filename='asl_signs.jpeg') }}" alt="Sign Language Chart"
-                 class="w-full h-64 object-contain rounded-xl shadow-lg border-2 border-cyan-300 bg-white">
-        </div>
-        
-        <!-- <div class="w-full md:w-1/2">
-            <img src="{{ url_for('static', filename='asl_signs.jpeg') }}" alt="Sign Language Chart"
-                 class="w-full h-64 object-contain rounded-xl shadow-lg border-2 border-cyan-300 bg-white">
-        </div> -->
-        
+       <!-- Sign Language Chart Image -->
+<div class="w-full md:w-[854px]">
+    <img src="{{ url_for('static', filename='asl_signs.jpeg') }}" alt="Sign Language Chart"
+         class="w-full h-[480px] object-contain rounded-xl shadow-lg border-2 border-cyan-300 bg-white">
+</div>
 
-        <!-- Video Feed -->
-        <div class="w-full md:w-1/2">
-            <div class="relative h-64 border-4 border-cyan-400 rounded-xl overflow-hidden shadow-xl glass w-full">
-                <img id="video" class="w-full h-full object-cover rounded-xl" src="{{ url_for('video_feed') }}" alt="Video Stream">
-            </div>
-        </div>
+<!-- Video Feed -->
+<!-- Video Feed -->
+<div class="w-full md:w-[854px]">
+    <div class="relative h-[480px] border-4 border-cyan-400 rounded-xl overflow-hidden shadow-xl glass w-full">
+        <img id="video" class="w-full h-full object-contain rounded-xl" src="{{ url_for('video_feed') }}" alt="Video Stream">
+    </div>
+</div>
+
+
 
     </div>
 

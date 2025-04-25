@@ -1,3 +1,4 @@
+
 // let polling = true;
 
 // function fetchOutput() {
@@ -6,7 +7,7 @@
 //         .then(res => res.json())
 //         .then(data => {
 //             document.getElementById('output-box').innerText = data.text;
-//             setTimeout(fetchOutput, 500); // Poll every 0.5s
+//             setTimeout(fetchOutput, 500);
 //         });
 // }
 
@@ -20,7 +21,17 @@
 //         });
 // });
 
+// document.getElementById('clear-btn').addEventListener('click', () => {
+//     fetch('/clear', { method: 'POST' })
+//         .then(() => {
+//             document.getElementById('output-box').innerText = "Detecting...";
+//             polling = true;
+//             fetchOutput();
+//         });
+// });
+
 // window.onload = fetchOutput;
+
 let polling = true;
 
 function fetchOutput() {
@@ -40,6 +51,12 @@ document.getElementById('stop-btn').addEventListener('click', () => {
         .then(() => fetch('/speak', { method: 'POST' }))
         .then(() => {
             document.getElementById('output-box').innerText += "\n[Speech Completed]";
+            
+            // 🔁 Resume prediction after speech
+            setTimeout(() => {
+                polling = true;
+                fetchOutput();
+            }, 1000);  // 1 sec delay before restarting
         });
 });
 
@@ -53,3 +70,4 @@ document.getElementById('clear-btn').addEventListener('click', () => {
 });
 
 window.onload = fetchOutput;
+
