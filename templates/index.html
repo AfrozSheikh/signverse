@@ -1,0 +1,61 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Language to Speech</title>
+    <script defer src="/static/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet"> -->
+<!-- </head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col items-center justify-center px-4 py-8">
+
+    <h1 class="text-3xl font-bold mb-6 text-blue-600">Sign Language to Text and Speech</h1>
+
+    <div class="mb-6 border-4 border-blue-500 rounded-lg overflow-hidden shadow-lg">
+        <img id="video" class="w-full max-w-2xl" src="{{ url_for('video_feed') }}" alt="Video Stream">
+    </div>
+
+    <h2 class="text-xl font-semibold mb-2">Detected Text:</h2>
+    <div id="output-box" class="w-full max-w-2xl bg-white rounded-lg border border-gray-300 p-4 mb-6 shadow-md text-lg text-gray-700">
+        Detecting...
+    </div>
+
+    <button id="stop-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+        Stop and Speak
+    </button>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Language to Speech</title>
+    <script defer src="/static/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col items-center justify-center px-4 py-8">
+
+    <h1 class="text-3xl font-bold mb-6 text-blue-600">Sign Language to Text and Speech</h1>
+
+    <div class="mb-6 border-4 border-blue-500 rounded-lg overflow-hidden shadow-lg">
+        <img id="video" class="w-full max-w-2xl" src="{{ url_for('video_feed') }}" alt="Video Stream">
+    </div>
+
+    <h2 class="text-xl font-semibold mb-2">Detected Text:</h2>
+    <div id="output-box" class="w-full max-w-2xl bg-white rounded-lg border border-gray-300 p-4 mb-6 shadow-md text-lg text-gray-700">
+        Detecting...
+    </div>
+
+    <div class="flex gap-4">
+        <button id="stop-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+            Stop and Speak
+        </button>
+        <button id="clear-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
+            Clear Text
+        </button>
+    </div>
+
+</body>
+</html>
