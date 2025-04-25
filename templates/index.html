@@ -26,7 +26,7 @@
 
 </body>
 </html> -->
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,6 +54,84 @@
         </button>
         <button id="clear-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300">
             Clear Text
+        </button>
+    </div>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language to Speech</title>
+    <script defer src="/static/script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Background Animation */
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Button Hover Effects */
+        .btn {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Neon Effect */
+        .neon {
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen px-6 text-white">
+
+    <!-- Title -->
+    <h1 class="text-4xl font-extrabold text-center mb-6 text-cyan-400 drop-shadow-lg">
+        🖐 Sign Language to Speech
+    </h1>
+
+    <!-- Video Feed Container -->
+    <div class="relative border-4 border-cyan-400 rounded-xl overflow-hidden shadow-xl glass w-full max-w-2xl">
+        <img id="video" class="w-full rounded-xl" src="{{ url_for('video_feed') }}" alt="Video Stream">
+    </div>
+
+    <!-- Detected Text -->
+    <h2 class="text-xl font-semibold mt-6">Detected Text:</h2>
+    <div id="output-box" class="glass w-full max-w-2xl p-4 text-lg text-white shadow-md mt-2">
+        Detecting...
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex gap-6 mt-6">
+        <button id="stop-btn" class="btn bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-xl neon">
+            🎤 Stop & Speak
+        </button>
+        <button id="clear-btn" class="btn bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl">
+            🗑 Clear Text
         </button>
     </div>
 
