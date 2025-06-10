@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - SignVerse</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="text-white font-sans">
+
+  <!-- Navbar -->
+  <nav class="w-full px-4 sm:px-6 py-4 flex justify-between items-center bg-dark-800/80 backdrop-blur-md fixed top-0 left-0 z-50 shadow-lg">
+    <h1 class="text-3xl sm:text-4xl font-bold text-cyan-300">SignVerse</h1>
+    <ul class="flex gap-4 sm:gap-8 text-lg sm:text-xl font-medium">
+      <li><a href="/" class="hover:text-cyan-400">Home</a></li>
+      <li><a href="/about" class="hover:text-cyan-400">About</a></li>
+      <li><a href="/how-it-works" class="hover:text-cyan-400">How It Works</a></li>
+      <li><a href="/contact" class="hover:text-cyan-400">Contact</a></li>
+      <li><a href="/team" class="hover:text-cyan-400">Team</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main -->
+  <main class="pt-28 px-6 pb-16 max-w-4xl mx-auto">
+    <div class="glass p-8 rounded-2xl shadow-lg">
+      <h2 class="text-4xl font-bold text-cyan-300 mb-4">🔍 About SignVerse</h2>
+
+      <p class="text-lg mb-6 text-gray-200">
+        <strong>SignVerse</strong> is a real-time American Sign Language (ASL) detection system designed to bridge communication gaps between the hearing and speech-impaired communities. This project was built as part of our college innovation drive 🧑‍🎓❤️.
+      </p>
+
+      <h3 class="text-2xl font-semibold text-cyan-200 mb-2">🚀 Key Features</h3>
+      <ul class="list-disc pl-6 text-gray-300 mb-6">
+        <li>Real-time ASL detection using webcam</li>
+        <li>Supports all alphabets (A-Z)</li>
+        <li>Live text output</li>
+        <li>Text-to-speech functionality (Coming Soon...)</li>
+        <li>User-friendly interface</li>
+      </ul>
+
+      <h3 class="text-2xl font-semibold text-cyan-200 mb-2">🧠 Tech Stack</h3>
+      <ul class="list-disc pl-6 text-gray-300 mb-6">
+        <li><strong>Frontend:</strong> HTML, Tailwind CSS, JavaScript</li>
+        <li><strong>Backend:</strong> Flask (Python)</li>
+        <li><strong>ML Model:</strong> Random Forest Classifier (.p file)</li>
+        <li><strong>Vision:</strong> OpenCV + MediaPipe</li>
+        <li><strong>Speech:</strong> pyttsx3 (Text to Speech)</li>
+      </ul>
+
+      <h3 class="text-2xl font-semibold text-cyan-200 mb-2">⚙️ How It Works</h3>
+      <p class="mb-4 text-gray-300">
+        SignVerse captures hand gestures using your webcam, extracts keypoints using MediaPipe, and feeds them into a trained ML model to detect ASL characters.
+      </p>
+      <p class="mb-6 text-gray-300">
+        The predicted letters are displayed in real-time and can be converted into voice using text-to-speech — making the communication two-way and interactive.
+      </p>
+
+     
+
+      <div class="mt-8">
+        <a href="/" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300">
+          🔁 Try SignVerse
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 mt-auto text-sm text-cyan-100 opacity-80 border-t border-cyan-900">
+    &copy; 2025 SignVerse · Built with 🤖 & ❤️ by students
+  </footer>
+
+</body>
+</html>

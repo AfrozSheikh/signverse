@@ -1,91 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Language to Speech</title>
-    <script defer src="/static/script.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-        body {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            background-size: 400% 400%;
-            animation: gradientBG 10s ease infinite;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SignVerse - Real-time Sign Language Detection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+            },
+            dark: {
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+            }
+          },
+          animation: {
+            'gradient': 'gradient 10s ease infinite',
+          },
+          keyframes: {
+            gradient: {
+              '0%, 100%': { 'background-position': '0% 50%' },
+              '50%': { 'background-position': '100% 50%' },
+            }
+          }
         }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn {
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2);
-        }
-
-        .neon {
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
-        }
-    </style>
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .bg-gradient {
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        background-size: 400% 400%;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+    }
+  </style>
 </head>
-<body class="flex flex-col items-center justify-start min-h-screen px-4 py-10 text-white">
+<body class="bg-gradient bg-fixed animate-gradient text-gray-100 font-sans flex flex-col min-h-screen">
 
-    <!-- Title -->
-    <h1 class="text-4xl font-extrabold text-center mb-10 text-cyan-400 drop-shadow-lg">
-        🖐 Sign Language to Speech
-    </h1>
-
-    <!-- Image and Video Side by Side -->
-    <div class="flex flex-col md:flex-row gap-8 items-start justify-center w-full max-w-4xl mb-10">
-        
-        <!-- Sign Language Chart Image -->
-       <!-- Sign Language Chart Image -->
-<div class="w-full md:w-[854px]">
-    <img src="{{ url_for('static', filename='asl_signs.jpeg') }}" alt="Sign Language Chart"
-         class="w-full h-[480px] object-contain rounded-xl shadow-lg border-2 border-cyan-300 bg-white">
-</div>
-
-<!-- Video Feed -->
-<!-- Video Feed -->
-<div class="w-full md:w-[854px]">
-    <div class="relative h-[480px] border-4 border-cyan-400 rounded-xl overflow-hidden shadow-xl glass w-full">
-        <img id="video" class="w-full h-full object-contain rounded-xl" src="{{ url_for('video_feed') }}" alt="Video Stream">
-    </div>
-</div>
-
-
-
+  <!-- Navbar -->
+  <nav class="w-full px-4 sm:px-6 py-4 flex justify-between items-center bg-dark-800/80 backdrop-blur-md fixed top-0 left-0 z-50 shadow-lg">
+    <h1 class="text-3xl sm:text-4xl font-bold text-primary-400">SignVerse</h1>
+    <ul class="flex gap-4 sm:gap-8 text-lg sm:text-xl font-medium">
+      <li><a href="/" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">Home</a></li>
+      <li><a href="/about" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">About</a></li>
+      <li><a href="/how-it-works" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">How It Works</a></li>
+      <li><a href="/contact" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">Contact</a></li>
+      <li><a href="/team" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">Team</a></li>
+    </ul>
+  </nav>
+  
+  <!-- Main Content -->
+  <main class="pt-24 px-4 pb-8 flex-1 w-full max-w-4xl mx-auto">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl sm:text-3xl font-bold text-primary-400 mb-2">
+        Real-Time Sign Language Detection
+      </h2>
+      <p class="text-gray-300 max-w-xl mx-auto text-sm">
+        Communicate seamlessly with our  sign language detection system.
+      </p>
     </div>
 
-    <!-- Detected Text -->
-    <h2 class="text-xl font-semibold mt-4">Detected Text:</h2>
-    <div id="output-box" class="glass w-full max-w-md p-4 text-lg text-white shadow-md mt-2">
-        Detecting...
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+      <!-- ASL Chart - Extra Large -->
+      <div class="glass p-5 rounded-xl shadow-lg border-2 border-primary-400/30 transition-all hover:border-primary-400/50">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-semibold text-primary-300">ASL Reference Chart</h3>
+          <span class="text-sm bg-primary-600/30 text-primary-200 px-3 py-1 rounded-full">Guide</span>
+        </div>
+        <div class="h-80 bg-white/5 rounded-lg overflow-hidden border-2 border-white/10">
+          <img src="{{ url_for('static', filename='asl_signs.jpeg') }}" 
+               alt="American Sign Language Chart" 
+               class="w-full h-full object-contain p-3"/>
+        </div>
+      </div>
+    
+      <!-- Live Video - Extra Large -->
+      <div class="glass p-5 rounded-xl shadow-lg border-2 border-primary-400/30 transition-all hover:border-primary-400/50">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-semibold text-primary-300">Live Sign Detection</h3>
+          <span class="text-sm bg-green-600/30 text-green-200 px-3 py-1 rounded-full">Active</span>
+        </div>
+        <div class="h-80 bg-black/20 rounded-lg overflow-hidden border-2 border-white/10 relative">
+          <img id="video" 
+               class="w-full h-full object-cover" 
+               src="{{ url_for('video_feed') }}" 
+               alt="Sign language detection stream"/>
+          <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+            <!-- <div class="animate-pulse text-gray-300">Initializing camera...</div> -->
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Buttons -->
-    <div class="flex gap-6 mt-6">
-        <button id="stop-btn" class="btn bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-xl neon">
-            🎤 Stop & Speak
-        </button>
-        <button id="clear-btn" class="btn bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl">
-            🗑 Clear Text
-        </button>
+    <!-- Detected Text - Smaller -->
+    <div class="max-w-2xl mx-auto mb-6">
+      <h3 class="text-base font-medium text-primary-300 mb-1 text-center">Detected Text</h3>
+      <div id="output-box" 
+           class="glass p-3 min-h-16 rounded-lg text-base text-white shadow-inner border border-white/10 flex items-center justify-center">
+        <span class="text-gray-400 text-sm">Signs will appear here...</span>
+      </div>
     </div>
 
+    <!-- Controls -->
+    <div class="flex flex-wrap gap-3 justify-center">
+      <button id="clear-btn" 
+              class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow-md transition-all hover:shadow-lg active:scale-95 flex items-center gap-2 text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+        </svg>
+        Clear Text
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 text-xs sm:text-sm text-gray-400 border-t border-gray-800 mt-6">
+    <div class="container mx-auto px-4">
+      <p>&copy; 2025 SignVerse. All rights reserved.</p>
+      <p class="mt-1">Bridging communication gaps through AI technology</p>
+    </div>
+  </footer>
+
+  <script>
+    function updateDetectedText() {
+      fetch('/get_output')
+        .then(response => response.json())
+        .then(data => {
+          const outputBox = document.getElementById('output-box');
+          if (data.text && data.text.trim() !== '') {
+            outputBox.innerHTML = `<span class="text-white animate-pulse">${data.text}</span>`;
+          } else {
+            outputBox.innerHTML = '<span class="text-gray-400 text-sm">Signs will appear here...</span>';
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching detected text:', error);
+        });
+    }
+
+    setInterval(updateDetectedText, 500);
+
+    document.getElementById('clear-btn').addEventListener('click', () => {
+      fetch('/clear', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          const outputBox = document.getElementById('output-box');
+          outputBox.innerHTML = '<span class="text-green-400 text-sm">Text cleared successfully</span>';
+          setTimeout(() => {
+            outputBox.innerHTML = '<span class="text-gray-400 text-sm">Signs will appear here...</span>';
+          }, 1500);
+        }
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,72 @@
+<!-- templates/team.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team - SignVerse</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-900 text-white font-sans">
+
+  <!-- Navbar -->
+  <nav class="w-full px-4 sm:px-6 py-4 flex justify-between items-center bg-dark-800/80 backdrop-blur-md fixed top-0 left-0 z-50 shadow-lg">
+    <h1 class="text-3xl sm:text-4xl font-bold text-primary-400">SignVerse</h1>
+    <ul class="flex gap-4 sm:gap-8 text-lg sm:text-xl font-medium">
+      <li><a href="/" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">Home</a></li>
+      <li><a href="/about" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">About</a></li>
+      <li><a href="/how-it-works" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">How It Works</a></li>
+      <li><a href="/contact" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">Contact</a></li>
+      <li><a href="/team" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">Team</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="text-center py-10">
+    <h2 class="text-3xl font-bold text-cyan-300">Meet Our Team</h2>
+    <p class="text-gray-400 mt-2">The minds behind SignVerse</p>
+  </header>
+
+  <!-- Team Cards -->
+  <section class="max-w-6xl mx-auto px-4 pb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    
+    <!-- Team Member 1 -->
+    <div class="bg-slate-800 rounded-xl shadow-lg p-6 text-center border border-cyan-500/20">
+      <img src="{{ url_for('static', filename='images/member1.jpg') }}" alt="Member 1" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-cyan-500">
+      <h3 class="text-xl font-semibold text-cyan-400">Amit Sharma</h3>
+      <p class="text-sm text-gray-300 mb-2">Frontend Developer</p>
+      <p class="text-sm text-gray-400 mb-1">📧 amit.sharma@email.com</p>
+      <p class="text-sm text-gray-400 mb-1">📞 +91-9876543210</p>
+      <a href="https://github.com/amitsharma" target="_blank" class="text-cyan-300 text-sm hover:underline">🔗 GitHub</a>
+    </div>
+
+    <!-- Team Member 2 -->
+    <div class="bg-slate-800 rounded-xl shadow-lg p-6 text-center border border-cyan-500/20">
+      <img src="{{ url_for('static', filename='images/member2.jpg') }}" alt="Member 2" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-cyan-500">
+      <h3 class="text-xl font-semibold text-cyan-400">Sneha Verma</h3>
+      <p class="text-sm text-gray-300 mb-2">Backend Developer</p>
+      <p class="text-sm text-gray-400 mb-1">📧 sneha.verma@email.com</p>
+      <p class="text-sm text-gray-400 mb-1">📞 +91-9123456789</p>
+      <a href="https://github.com/snehaverma" target="_blank" class="text-cyan-300 text-sm hover:underline">🔗 GitHub</a>
+    </div>
+
+    <!-- Team Member 3 -->
+    <div class="bg-slate-800 rounded-xl shadow-lg p-6 text-center border border-cyan-500/20">
+      <img src="{{ url_for('static', filename='images/member3.jpg') }}" alt="Member 3" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-cyan-500">
+      <h3 class="text-xl font-semibold text-cyan-400">Rohit Mehta</h3>
+      <p class="text-sm text-gray-300 mb-2">ML Model Integrator</p>
+      <p class="text-sm text-gray-400 mb-1">📧 rohit.mehta@email.com</p>
+      <p class="text-sm text-gray-400 mb-1">📞 +91-9000012345</p>
+      <a href="https://github.com/rohitmehta" target="_blank" class="text-cyan-300 text-sm hover:underline">🔗 GitHub</a>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 text-gray-400 border-t border-slate-700 text-sm">
+    &copy; 2025 SignVerse. Built with ❤️ for a better tomorrow.
+  </footer>
+
+</body>
+</html>
