@@ -55,41 +55,42 @@
   <main class="pt-28 px-6 pb-16 max-w-4xl mx-auto">
     <section class="glass p-8 rounded-2xl shadow-lg">
       <h2 class="text-4xl font-bold text-cyan-300 mb-8">📹 How SignVerse Works</h2>
-
+  
       <div class="flex flex-col gap-6">
         <div>
           <h3 class="text-2xl font-semibold text-cyan-200 mb-1">1️⃣ Live Video Input</h3>
           <p class="text-gray-300">
-            System user ka real-time hand gesture webcam se capture karta hai using <strong>OpenCV</strong>.
+            The system captures real-time hand gestures from the webcam using <strong>OpenCV</strong>.
           </p>
         </div>
         <div>
           <h3 class="text-2xl font-semibold text-cyan-200 mb-1">2️⃣ Preprocessing</h3>
           <p class="text-gray-300">
-            Captured frame ko preprocess kiya jata hai — resize, grayscale, normalization — taki model ke input me fit ho.
+            The captured frame is preprocessed — resized, converted to grayscale, and normalized — to fit the model's input format.
           </p>
         </div>
         <div>
           <h3 class="text-2xl font-semibold text-cyan-200 mb-1">3️⃣ Model Prediction</h3>
           <p class="text-gray-300">
-            Ek trained <strong>Random Forest model</strong> frame ko analyze karta hai aur predict karta hai kaunsa sign hai — like A, B, C... Z.
+            A trained <strong>Random Forest model</strong> analyzes the frame and predicts the corresponding sign — like A, B, C... Z.
           </p>
         </div>
         <div>
           <h3 class="text-2xl font-semibold text-cyan-200 mb-1">4️⃣ Text Display</h3>
           <p class="text-gray-300">
-            Predicted character ko screen pe display kiya jata hai — live "Detected Text" box ke andar.
+            The predicted character is displayed on the screen inside the live "Detected Text" box.
           </p>
         </div>
         <div>
           <h3 class="text-2xl font-semibold text-cyan-200 mb-1">5️⃣ Convert to Speech</h3>
           <p class="text-gray-300">
-            User agar chahe to <strong>Text-to-Speech (TTS)</strong> feature se detect hua text voice me sun bhi sakta hai.
+            If the user wants, they can listen to the detected text using the <strong>Text-to-Speech (TTS)</strong> feature.
           </p>
         </div>
       </div>
     </section>
   </main>
+  
 
   <!-- Footer -->
   <footer class="text-center py-6 mt-auto text-sm text-cyan-100 opacity-80 border-t border-cyan-900">
