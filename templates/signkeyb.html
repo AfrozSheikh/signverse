@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASL Finger Spelling - SignVerse</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      padding-top: 80px;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .letter-card {
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+    }
+    
+    .letter-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.15);
+    }
+  </style>
+</head>
+<body class="text-white min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="w-full px-4 sm:px-6 py-4 flex justify-between items-center bg-gray-800/80 backdrop-blur-md fixed top-0 left-0 z-50 shadow-lg">
+    <h1 class="text-3xl sm:text-4xl font-bold text-indigo-400">SignVerse</h1>
+    <ul class="flex gap-4 sm:gap-8 text-lg sm:text-xl font-medium">
+      <li><a href="/" class="text-white hover:text-indigo-400 transition-colors px-3 py-2 rounded-lg">Home</a></li>
+      <li><a href="/about" class="text-white hover:text-indigo-400 transition-colors px-3 py-2 rounded-lg">About</a></li>
+      <li><a href="/how-it-works" class="text-white hover:text-indigo-400 transition-colors px-3 py-2 rounded-lg">How It Works</a></li>
+      <li><a href="/contact" class="text-white hover:text-indigo-400 transition-colors px-3 py-2 rounded-lg">Contact</a></li>
+      <li><a href="/team" class="text-white hover:text-indigo-400 transition-colors px-3 py-2 rounded-lg">Team</a></li>
+      <li><a href="/signkeyb" class="text-white hover:text-indigo-400 transition-colors px-3 py-2 rounded-lg bg-indigo-600/30">Sign Key</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8 max-w-4xl">
+    <div class="glass p-8 rounded-2xl shadow-lg">
+      <h1 class="text-3xl font-bold text-cyan-300 mb-2">ASL Finger Spelling</h1>
+      <p class="text-gray-300 mb-6">Type a word to see its ASL fingerspelling representation:</p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 mb-8">
+        <input 
+        type="text" 
+        id="wordInput" 
+        placeholder="Enter a word" 
+        class="flex-grow px-4 py-3 rounded-lg bg-white/10 text-white border border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition"
+        onkeypress="if(event.key === 'Enter') showASL()"
+        oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"
+      />
+      
+        <button 
+          onclick="showASL()"
+          class="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-medium rounded-lg transition-colors shadow-sm"
+        >
+          Show ASL
+        </button>
+      </div>
+
+      <div id="error-message" class="text-red-400 mb-4 font-medium hidden"></div>
+
+      <div id="asl-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"></div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <!-- <footer class="text-center py-6 mt-20 text-sm text-cyan-100 opacity-80 border-t border-cyan-900">
+    &copy; 2025 SignVerse · Designed with ❤️ by the Team
+  </footer> -->
+
+  <script>
+    function showASL() {
+      const input = document.getElementById('wordInput').value.trim().toUpperCase();
+      const container = document.getElementById('asl-container');
+      const errorMsg = document.getElementById('error-message');
+      
+      container.innerHTML = ''; // Clear previous
+      errorMsg.classList.add('hidden');
+
+      if (!input) {
+        errorMsg.textContent = 'Please enter a word!';
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+
+      if (!/^[A-Z]+$/.test(input)) {
+        errorMsg.textContent = 'Please enter letters only (A-Z).';
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+
+      for (const letter of input) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'letter-card rounded-lg p-4 shadow-md flex flex-col items-center';
+
+        const img = document.createElement('img');
+        img.src = `images/asl/${letter}.png`;
+        img.alt = `ASL Letter ${letter}`;
+        img.className = 'w-20 h-24 object-contain mb-2';
+        img.onerror = function() {
+          this.src = 'images/asl/unknown.png';
+        };
+
+        const caption = document.createElement('span');
+        caption.textContent = `Letter ${letter}`;
+        caption.className = 'text-cyan-100 font-medium';
+
+        wrapper.appendChild(img);
+        wrapper.appendChild(caption);
+        container.appendChild(wrapper);
+      }
+    }
+  </script>
+</body>
+</html>

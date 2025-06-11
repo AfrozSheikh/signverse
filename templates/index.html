@@ -60,6 +60,7 @@
       <li><a href="/how-it-works" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">How It Works</a></li>
       <li><a href="/contact" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">Contact</a></li>
       <li><a href="/team" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">Team</a></li>
+      <li><a href="/signkeyb" class="hover:text-primary-400 transition-colors px-3 py-2 rounded-lg">Sign Key</a></li>
     </ul>
   </nav>
   
@@ -106,14 +107,26 @@
       </div>
     </div>
 
-    <!-- Detected Text - Smaller -->
-    <div class="max-w-2xl mx-auto mb-6">
-      <h3 class="text-base font-medium text-primary-300 mb-1 text-center">Detected Text</h3>
-      <div id="output-box" 
-           class="glass p-3 min-h-16 rounded-lg text-base text-white shadow-inner border border-white/10 flex items-center justify-center">
-        <span class="text-gray-400 text-sm">Signs will appear here...</span>
-      </div>
+   <!-- Detected Text and Speak Button - Centered -->
+<div class="max-w-2xl mx-auto mb-6 flex flex-col items-center gap-4">
+  <div class="w-full">
+    <h3 class="text-base font-medium text-primary-300 mb-1 text-center">Detected Text</h3>
+    <div id="output-box" 
+         class="glass p-3 min-h-16 rounded-lg text-base text-white shadow-inner border border-white/10 flex items-center justify-center">
+      <span class="text-gray-400 text-sm">Signs will appear here...</span>
     </div>
+  </div>
+
+  <button id="speak-btn" 
+      class="px-5 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg shadow-md transition-all hover:shadow-lg active:scale-95 flex items-center gap-2 text-sm">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M9 4.804a1 1 0 012 0v10.392a1 1 0 11-2 0V4.804zM4.343 5.757a1 1 0 111.414 1.414A5 5 0 008 10a5 5 0 01-2.243 2.829 1 1 0 11-1.414-1.414A3 3 0 008 10a3 3 0 00-1.243-2.415 1 1 0 01-.414-1.414z" />
+      <path d="M14.657 5.757a1 1 0 10-1.414 1.414A3 3 0 0112 10a3 3 0 001.243 2.415 1 1 0 101.414-1.414A5 5 0 0112 10a5 5 0 012.243-2.829 1 1 0 000-1.414z" />
+    </svg>
+    Speak Text
+  </button>
+</div>
+
 
     <!-- Controls -->
     <div class="flex flex-wrap gap-3 justify-center">
@@ -136,6 +149,23 @@
   </footer>
 
   <script>
+
+document.getElementById('speak-btn').addEventListener('click', () => {
+  fetch('/speak', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      console.log('Speaking text...');
+    }
+  })
+  .catch(error => {
+    console.error('Error triggering speech:', error);
+  });
+});
+
     function updateDetectedText() {
       fetch('/get_output')
         .then(response => response.json())
